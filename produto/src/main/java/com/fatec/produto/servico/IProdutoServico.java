@@ -11,6 +11,7 @@ public interface IProdutoServico {
 	public List<Catalogo> consultaPorDescricao(String descricao);
 	public Optional <Produto> cadastrar(Produto produto);
 	public Optional <Catalogo> consultarPorId(String id);
+	public Optional <Produto> consultarProdutoId(String id);
 	public Optional <Produto> atualizar(Long id, Produto produto);
 	public void excluir(Long id);
 

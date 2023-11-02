@@ -21,6 +21,7 @@ public class ProdutoServico implements IProdutoServico {
 	@Autowired
 	ImagemServico imagemServico;
 	Logger logger = LogManager.getLogger(this.getClass());
+
 	@Override
 	public List<Catalogo> consultaCatalogo() {
 		Catalogo c = null;
@@ -56,7 +57,7 @@ public class ProdutoServico implements IProdutoServico {
 	public Optional<Catalogo> consultarPorId(String id) {
 		logger.info(">>>>>> servico consulta por id chamado");
 		Long codProduto = Long.parseLong(id);
-		
+
 		Catalogo c = null;
 		List<Catalogo> listaCatalogo = new ArrayList<>();
 		List<Produto> listaP = repository.findAll();
@@ -71,16 +72,16 @@ public class ProdutoServico implements IProdutoServico {
 			}
 		}
 		logger.info(">>>>>> lista de catalogo contem =>" + listaCatalogo.size());
-		//int cod = Long.valueOf(codProduto).intValue();
-		//logger.info(">>>>>> codigo convertido para inteiro =>" + cod);
+		// int cod = Long.valueOf(codProduto).intValue();
+		// logger.info(">>>>>> codigo convertido para inteiro =>" + cod);
 		Optional<Catalogo> produtoDoCatalogo = Optional.empty();
-		for(Catalogo catalogo : listaCatalogo) {
-			
+		for (Catalogo catalogo : listaCatalogo) {
+
 			if ((catalogo.getId().longValue() == codProduto.longValue())) {
-				 produtoDoCatalogo = Optional.ofNullable(catalogo);
+				produtoDoCatalogo = Optional.ofNullable(catalogo);
 			}
 		}
-		
+
 		return produtoDoCatalogo;
 
 	}
@@ -94,7 +95,17 @@ public class ProdutoServico implements IProdutoServico {
 	@Override
 	public void excluir(Long id) {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	@Override
+	public Optional<Produto> consultarProdutoId(String id) {
+		try {
+			Long codProduto = Long.parseLong(id);
+			return repository.findById(codProduto);
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException("Identificador invalido =>" + e.getMessage());
+		}
 	}
 
 }
