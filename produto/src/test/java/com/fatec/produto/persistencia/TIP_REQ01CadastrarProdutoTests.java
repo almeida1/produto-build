@@ -16,9 +16,9 @@ class TIP_REQ01CadastrarProdutoTests {
 	@Test
 	void ct01_cadastrar_produto_com_sucesso() {
 		Produto produto = new Produto("Eletrobomba 110V para Maquina de Lavar e Lava Louças", "maquina de lavar", 51.66, 12);
-		Produto re = new Produto("Eletrobomba 110V para Maquina de Lavar e Lava Louças", "maquina de lavar", 51.66, 12);
-		Produto ro = repositorio.save(produto);
-		assertTrue(re.equals(ro));
+		Produto resultado_esperado = produto;
+		Produto resultado_obtido = repositorio.save(produto);
+		assertTrue(resultado_esperado.equals(resultado_obtido));
 	}
 
 }
